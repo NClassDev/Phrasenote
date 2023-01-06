@@ -70,6 +70,19 @@ fun Phrase.toPhraseEntity(): PhraseEntity = PhraseEntity(
     this.resource
 )
 
+fun Phrase.PhraseDummie(): Phrase = Phrase(
+    title = "The Perks of Being a Wallflower",
+    author = "Stephen Chbosky",
+    location= "Page 12",
+    phrase= "get along with",
+    phrase_example= "How are you getting along \n" +
+            "with the training course”",
+    meaning= "Have a good relationship with some one",
+    create_at= "Created at May12, 2022 ",
+    likes= 12,
+    resource = "The Perks of Being a Wallflower"
+)
+
 fun List<PhraseEntity>.toPhraseList(): PhraseList {
     val resultList = mutableListOf<Phrase>()
     this.forEach { phraseEntity ->

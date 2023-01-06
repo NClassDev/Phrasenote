@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 
 class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
 
-    suspend fun fetchGetAllPhrases() = liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
+    fun fetchGetAllPhrases() = liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
         emit(Resource.Loading())
         try {
             emit(Resource.Success(repository.getAllPhrases()))
@@ -28,6 +28,6 @@ class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
 
 class PhraseViewModelFactory(private val repo: PhraseRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return modelClass.getConstructor(PhraseViewModel::class.java).newInstance(repo)
+        return modelClass.getConstructor(PhraseRepository::class.java).newInstance(repo)
     }
 }

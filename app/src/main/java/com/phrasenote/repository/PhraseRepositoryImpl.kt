@@ -1,13 +1,15 @@
 package com.phrasenote.repository
 
 import com.phrasenote.data.local.PhraseLocalDataSource
-import com.phrasenote.data.model.Phrase
-import com.phrasenote.data.model.PhraseEntity
-import com.phrasenote.data.model.PhraseList
-import com.phrasenote.data.model.toPhraseEntity
+import com.phrasenote.data.model.*
 
 class PhraseRepositoryImpl(private val localDataSource: PhraseLocalDataSource): PhraseRepository {
+
     override suspend fun getAllPhrases(): PhraseList {
+        if (localDataSource.getPhrases().results.isEmpty()) {
+            val phraseTemp = Phrase()
+            localDataSource.savePhrase(phraseTemp.PhraseDummie().toPhraseEntity())
+        }
         return localDataSource.getPhrases()
     }
 
