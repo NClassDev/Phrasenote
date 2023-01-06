@@ -5,4 +5,10 @@
     <string name="add_phrase">Add Phrase Screen</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="resource_title">Resource title</string>
+    <string name="author_resource_title">Autor Resource</string>
+    <string name="phrase_title">Phrase</string>
+    <string name="phrase_example_title">Phrase Example</string>
+    <string name="phrase_meaning_title">Meaning</string>
+    <string name="location_title">Location</string>
 </resources>

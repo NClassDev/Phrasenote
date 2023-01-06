@@ -8,6 +8,7 @@ import com.phrasenote.data.model.PhraseEntity
 
 @Dao
 interface PhraseDao {
+
     @Query("SELECT * FROM phraseentity")
     suspend fun getAllPhrases(): List<PhraseEntity>
 

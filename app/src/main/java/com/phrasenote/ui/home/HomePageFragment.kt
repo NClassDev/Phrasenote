@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.phrasenote.R
 import com.phrasenote.core.Resource
@@ -35,6 +36,11 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.On
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentHomePageBinding.bind(view)
+
+        binding.button.setOnClickListener {
+            val action = HomePageFragmentDirections.actionHomePageFragmentToAddPhraseFragment()
+            findNavController().navigate(action)
+        }
 
         viewModel.fetchGetAllPhrases().observe(viewLifecycleOwner, Observer { result ->
 

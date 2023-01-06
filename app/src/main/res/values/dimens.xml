@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_title_size">22dp</dimen>
+    <dimen name="text_title_margin_bottom">19dp</dimen>
+
+    <dimen name="box_title_text_size">15dp</dimen>
+    <dimen name="box_title_margin_bottom">14dp</dimen>
+    <dimen name="box_title_margin_start">19dp</dimen>
+
+    <dimen name="box_form_text_size">12dp</dimen>
+    <dimen name="box_form_margin_bottom">38dp</dimen>
+    <dimen name="box_form_margin_start">29dp</dimen>
+
+    <dimen name="picture_circle_resource_size">60dp</dimen>
+    <dimen name="icon_tab_size">24dp</dimen>
+
+</resources>

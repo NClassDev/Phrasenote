@@ -10,7 +10,7 @@ class PhraseLocalDataSource(private val phraseDao: PhraseDao) {
         return phraseDao.getAllPhrases().toPhraseList()
     }
 
-    suspend fun savePhrase(phraseEntity: PhraseEntity) {
+   suspend fun savePhrase(phraseEntity: PhraseEntity) {
         phraseDao.savePhrase(phraseEntity)
     }
 

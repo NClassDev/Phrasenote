@@ -1,5 +1,6 @@
 package com.phrasenote.presentation
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
@@ -20,8 +21,14 @@ class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
         }
     }
 
-    suspend fun savePhrase(phrase: Phrase) {
-        repository.savePhrase(phrase)
+     fun savePhrase(phrase: Phrase) = liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
+         emit(Resource.Loading())
+         try {
+             emit(Resource.Success(repository.savePhrase(phrase)))
+         } catch (e:Exception) {
+             emit(Resource.Failure(e))
+             Log.d("Page", Resource.Failure(e).toString())
+         }
     }
 
 }
