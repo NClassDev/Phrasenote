@@ -11,4 +11,12 @@
     <string name="phrase_example_title">Phrase Example</string>
     <string name="phrase_meaning_title">Meaning</string>
     <string name="location_title">Location</string>
+
+    <string name="Welcome_title">Welcome</string>
+    <string name="user_name_title">John Carson</string>
+
+    <string name="my_resources_title">My Resources</string>
+    <string name="my_phrases_title">My Phrases</string>
+
+
 </resources>

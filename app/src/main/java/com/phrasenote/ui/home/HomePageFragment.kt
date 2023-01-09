@@ -25,6 +25,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.On
 
     private lateinit var binding: FragmentHomePageBinding
     private lateinit var phraseAdapter: PhraseAdapter
+    private lateinit var resourceAdapter: PhraseAdapter
 
     private val viewModel by viewModels<PhraseViewModel> {
         PhraseViewModelFactory(
@@ -53,6 +54,11 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.On
 
                     phraseAdapter = PhraseAdapter(result.data.results, this@HomePageFragment)
                     binding.rvMyPhrases.apply {
+                        adapter = phraseAdapter
+                    }
+
+                    resourceAdapter = PhraseAdapter(result.data.results, this@HomePageFragment)
+                    binding.rvResources.apply {
                         adapter = phraseAdapter
                     }
 
