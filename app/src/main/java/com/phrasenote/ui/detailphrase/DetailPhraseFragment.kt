@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
@@ -48,6 +49,10 @@ class DetailPhraseFragment : Fragment(R.layout.fragment_phrase_detail) {
             tvCreatedAt.text = phrase.create_at
             // TODO Create a Interface to load a Image from Camera
             Glide.with(binding.root).load(R.drawable.img_default_1).transform(CircleCrop()).into(binding.imgResource)
+        }
+
+        binding.imgBack.setOnClickListener {
+            findNavController().navigate(R.id.action_detailPhraseFragment_to_homePageFragment)
         }
 
     }

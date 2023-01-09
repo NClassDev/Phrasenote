@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.phrasenote.R
 import com.phrasenote.core.Resource
 import com.phrasenote.data.local.AppDatabase
@@ -33,6 +34,9 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase) {
         binding = FragmentAddPhraseBinding.bind(view)
         binding.btnSave.setOnClickListener {
             savePhrase()
+        }
+        binding.imgBack.setOnClickListener {
+            findNavController().navigate(R.id.action_addPhraseFragment_to_homePageFragment)
         }
     }
 

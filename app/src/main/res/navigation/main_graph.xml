@@ -24,10 +24,18 @@
         android:id="@+id/addPhraseFragment"
         android:name="com.phrasenote.ui.addphrase.AddPhraseFragment"
         android:label="fragment_add_phrase"
-        tools:layout="@layout/fragment_add_phrase" />
+        tools:layout="@layout/fragment_add_phrase" >
+        <action
+            android:id="@+id/action_addPhraseFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailPhraseFragment"
         android:name="com.phrasenote.ui.detailphrase.DetailPhraseFragment"
         android:label="fragment_phrase_detail"
-        tools:layout="@layout/fragment_phrase_detail" />
+        tools:layout="@layout/fragment_phrase_detail" >
+        <action
+            android:id="@+id/action_detailPhraseFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+    </fragment>
 </navigation>
