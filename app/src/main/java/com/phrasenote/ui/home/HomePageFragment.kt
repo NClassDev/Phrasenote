@@ -18,6 +18,7 @@ import com.phrasenote.presentation.PhraseViewModel
 import com.phrasenote.presentation.PhraseViewModelFactory
 import com.phrasenote.repository.PhraseRepositoryImpl
 import com.phrasenote.ui.home.adapters.PhraseAdapter
+import kotlinx.android.synthetic.main.fragment_home_page.*
 
 
 class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.OnPhraseClickListener {
@@ -68,6 +69,11 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.On
 
     override fun onPhraseClick(phrase: Phrase) {
         Log.d("HomePage", "PhraseClick: ${phrase.title}")
+        val bundle = Bundle().apply {
+            putSerializable("phrase", phrase)
+        }
+        viewModel.setCurrentPhrase(phrase)
+        findNavController().navigate(R.id.action_homePageFragment_to_detailPhraseFragment, bundle)
     }
 
 }

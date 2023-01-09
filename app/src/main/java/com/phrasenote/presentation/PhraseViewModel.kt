@@ -1,6 +1,7 @@
 package com.phrasenote.presentation
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
@@ -11,6 +12,8 @@ import com.phrasenote.repository.PhraseRepository
 import kotlinx.coroutines.Dispatchers
 
 class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
+
+    val currentPhrase = MutableLiveData<Phrase>()
 
     fun fetchGetAllPhrases() = liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
         emit(Resource.Loading())
@@ -29,6 +32,10 @@ class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
              emit(Resource.Failure(e))
              Log.d("Page", Resource.Failure(e).toString())
          }
+    }
+
+    fun setCurrentPhrase(phrase: Phrase) {
+        currentPhrase.postValue(phrase)
     }
 
 }

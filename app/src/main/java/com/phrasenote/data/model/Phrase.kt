@@ -1,10 +1,14 @@
 package com.phrasenote.data.model
 
+import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
+import java.io.Serializable
 
+@Parcelize
 data class Phrase(
     val id: Int = 0,
     val title: String = "",
@@ -15,8 +19,9 @@ data class Phrase(
     val meaning: String = "",
     val create_at: String = "",
     val likes: Long = -1,
-    val resource: String = ""
-)
+    val resource: String = "",
+    val resourceImg: String = ""
+): Serializable, Parcelable
 
 //Room
 @Entity
@@ -41,7 +46,9 @@ data class PhraseEntity(
     @ColumnInfo(name = "likes")
     val likes: Long = -1,
     @ColumnInfo(name = "resource")
-    val resource: String = ""
+    val resource: String = "",
+    @ColumnInfo(name = "resourceImg")
+    val resourceImg: String = ""
 )
 
 fun PhraseEntity.toPhrase(): Phrase = Phrase(
@@ -54,7 +61,8 @@ fun PhraseEntity.toPhrase(): Phrase = Phrase(
     this.meaning,
     this.create_at,
     this.likes,
-    this.resource
+    this.resource,
+    this.resourceImg
 )
 
 fun Phrase.toPhraseEntity(): PhraseEntity = PhraseEntity(
@@ -67,7 +75,8 @@ fun Phrase.toPhraseEntity(): PhraseEntity = PhraseEntity(
     this.meaning,
     this.create_at,
     this.likes,
-    this.resource
+    this.resource,
+    this.resourceImg
 )
 
 fun Phrase.PhraseDummie1(): Phrase = Phrase(
@@ -80,7 +89,8 @@ fun Phrase.PhraseDummie1(): Phrase = Phrase(
     meaning= "Have a good relationship with some one",
     create_at= "Created at May12, 2022 ",
     likes= 12,
-    resource = "The Perks of Being a Wallflower"
+    resource = "The Perks of Being a Wallflower",
+    resourceImg = "--"
 )
 
 fun Phrase.PhraseDummie2(): Phrase = Phrase(
@@ -93,7 +103,8 @@ fun Phrase.PhraseDummie2(): Phrase = Phrase(
     meaning= "Have a good relationship with some one",
     create_at= "Created at May12, 2022 ",
     likes= 1,
-    resource = "The Perks of Being a Wallflower"
+    resource = "The Perks of Being a Wallflower",
+    resourceImg = "--"
 )
 
 fun List<PhraseEntity>.toPhraseList(): PhraseList {

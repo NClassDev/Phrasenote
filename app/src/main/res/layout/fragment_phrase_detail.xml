@@ -1,14 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.detailphrase.DetailPhraseFragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="@string/phrase_detail" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_title"
+                style="@style/title_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:text="@string/phrase_title" />
+
+            <TextView
+                android:id="@+id/tv_author"
+                style="@style/regular_title_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="24dp"
+                android:gravity="center"
+                android:text="@string/phrase_title" />
+
+            <TextView
+                android:id="@+id/tv_resource"
+                style="@style/medium_title_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/phrase_title"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/img_resource"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <TextView
+                android:id="@+id/tv_location_title"
+                style="@style/regular_title_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="29dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="6dp"
+                android:gravity="right"
+                android:text="@string/phrase_title" />
+
+            <TextView
+                android:id="@+id/tv_phrase"
+                style="@style/title_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/phrase_title"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/tv_phrase_example"
+                style="@style/medium_title_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="40dp"
+                android:gravity="center"
+                android:text="@string/phrase_title" />
+
+            <TextView
+                style="@style/regular_title_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="29dp"
+                android:layout_marginBottom="6dp"
+                android:gravity="left"
+                android:text="@string/phrase_meaning_title"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_meaning"
+                style="@style/regular_title_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="41dp"
+                android:layout_marginTop="10dp"
+                android:gravity="left"
+                android:text="@string/phrase_title" />
+
+            <TextView
+                android:id="@+id/tv_created_at"
+                style="@style/regular_title_style"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="15dp"
+                android:gravity="right"
+                android:text="@string/phrase_title" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="@dimen/icon_tab_size"
+        android:layout_height="@dimen/icon_tab_size"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

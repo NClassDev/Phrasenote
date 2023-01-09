@@ -8,7 +8,6 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-
     <style name="box_title_style" parent="@android:style/Widget.TextView">
         <item name="android:textSize">@dimen/box_title_text_size</item>
         <item name="android:textColor">@color/black</item>
@@ -24,6 +23,16 @@
         <item name="android:layout_width">254dp</item>
         <item name="android:layout_marginBottom">@dimen/box_form_margin_bottom</item>
         <item name="android:layout_marginStart">@dimen/box_form_margin_start</item>
+    </style>
+
+    <style name="regular_title_style" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/regular_text_size</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="medium_title_style" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/medium_text_size</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
 </resources>

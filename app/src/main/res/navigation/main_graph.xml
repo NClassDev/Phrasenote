@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homePageFragment_to_detailPhraseFragment"
             app:destination="@id/detailPhraseFragment" />
+        <argument
+            android:name="phrase"
+            app:argType="com.phrasenote.data.model.Phrase"/>
     </fragment>
     <fragment
         android:id="@+id/addPhraseFragment"
