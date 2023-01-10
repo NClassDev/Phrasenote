@@ -19,4 +19,10 @@
     <string name="my_phrases_title">My Phrases</string>
 
 
+    <string name="dialog_permission_title">Permiso</string>
+    <string name="dialog_permission_default_message">Permisio por defecto</string>
+    <string name="dialog_permission_button_positive">Confirmar</string>
+    <string name="permision_message">Necesitamos permisos de cámara</string>
+
+
 </resources>

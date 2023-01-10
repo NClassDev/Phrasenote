@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Title" />
+                android:hint="Title" />
 
             <TextView
                 android:id="@+id/tv_resource"
@@ -39,10 +39,10 @@
                 android:text="@string/resource_title" />
 
             <EditText
-                android:id="@+id/ed_resource"
+                android:id="@+id/ed_resource_title"
                 style="@style/box_form_style"
                 android:layout_height="wrap_content"
-                android:text="Title" />
+                android:hint="Title" />
 
             <TextView
                 android:id="@+id/tv_author_resource"
@@ -55,7 +55,7 @@
                 android:id="@+id/ed_author_resource"
                 style="@style/box_form_style"
                 android:layout_height="wrap_content"
-                android:text="Title" />
+                android:hint="Title" />
 
             <TextView
                 android:id="@+id/tv_location"
@@ -68,7 +68,7 @@
                 android:id="@+id/ed_location"
                 style="@style/box_form_style"
                 android:layout_height="wrap_content"
-                android:text="Title" />
+                android:hint="Title" />
 
             <TextView
                 android:id="@+id/tv_phrase"
@@ -81,7 +81,7 @@
                 android:id="@+id/ed_phrase"
                 style="@style/box_form_style"
                 android:layout_height="wrap_content"
-                android:text="Title" />
+                android:hint="Title" />
 
             <TextView
                 android:id="@+id/tv_phrase_example"
@@ -94,7 +94,7 @@
                 android:id="@+id/ed_phrase_example"
                 style="@style/box_form_style"
                 android:layout_height="wrap_content"
-                android:text="Title" />
+                android:hint="Title" />
 
             <TextView
                 android:id="@+id/tv_meaning"
@@ -107,7 +107,7 @@
                 android:id="@+id/ed_meaning"
                 style="@style/box_form_style"
                 android:layout_height="wrap_content"
-                android:text="Title" />
+                android:hint="Title" />
 
         </LinearLayout>
 
