@@ -87,6 +87,8 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase) {
                     Log.d("AdPhrasePage",  "Loading")
                 }
                 is Resource.Success -> {
+                    showSnackbar("Phrase saved successfully")
+                    findNavController().navigate(R.id.action_addPhraseFragment_to_homePageFragment)
                     Log.d("AdPhrasePage", "Success: Saved ")
                 }
                 is Resource.Failure -> {
@@ -147,6 +149,10 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase) {
             }
 
         return response
+    }
+
+    private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
 }
