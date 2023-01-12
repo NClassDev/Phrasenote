@@ -30,6 +30,12 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="regular_light_title_style" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/regular_light_text_size</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
     <style name="medium_title_style" parent="@android:style/Widget.TextView">
         <item name="android:textSize">@dimen/medium_text_size</item>
         <item name="android:textColor">@color/black</item>

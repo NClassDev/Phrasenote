@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.phrasenote.R
 import com.phrasenote.core.BaseViewHolder
+import com.phrasenote.core.DataMapper
 import com.phrasenote.data.model.Phrase
 import com.phrasenote.data.model.PhraseList
 import com.phrasenote.databinding.PhraseItemBinding
@@ -50,6 +52,11 @@ class PhraseAdapter(
         BaseViewHolder<Phrase>(binding.root) {
         override fun bind(item: Phrase) {
             binding.tvTitle.text = item.title
+            binding.tvPhrase.text = item.phrase
+            binding.tvPhraseExample.text = item.phrase_example
+            if (item.resourceImg.length > 10) {
+                binding.imgResource.setImageBitmap(DataMapper.decodeImage(item.resourceImg!!))
+            }
         }
     }
 
