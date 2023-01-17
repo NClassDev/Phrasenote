@@ -30,7 +30,7 @@ import com.phrasenote.presentation.PhraseViewModelFactory
 import com.phrasenote.repository.PhraseRepositoryImpl
 
 
-class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase) {
+class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataValidationMessage {
 
     private lateinit var binding: FragmentAddPhraseBinding
     private var currentImagePath: String? = null
@@ -40,15 +40,29 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase) {
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private val permissionManager = PermissionManager.from(this)
 
+    private lateinit var phraseValidationPresenter : IPhraseValidationPresenter
+
     private val viewModel by viewModels<PhraseViewModel> {
         PhraseViewModelFactory(PhraseRepositoryImpl(PhraseLocalDataSource(AppDatabase.getDatabase(requireContext()).phraseDao())))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        phraseValidationPresenter = PhraseValidationPresenter(this)
         binding = FragmentAddPhraseBinding.bind(view)
         binding.btnSave.setOnClickListener {
-            savePhrase()
+            binding.apply {
+                phraseValidationPresenter.onValidation(
+                    resourceTitle = edResourceTitle.text.toString() ,
+                    author = edAuthorResource.text.toString(),
+                    location = edLocation.text.toString(),
+                    phrase = edPhrase.text.toString(),
+                    phraseExample = edPhraseExample.text.toString(),
+                    meaning = edMeaning.text.toString(),
+                    img = if( currentImagePath.isNullOrEmpty()) "-1" else currentImagePath!!
+                )
+            }
+
         }
         binding.imgBack.setOnClickListener {
             findNavController().navigate(R.id.action_addPhraseFragment_to_homePageFragment)
@@ -152,6 +166,15 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase) {
     }
 
     private fun showSnackbar(message: String) {
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onPhraseValidationSuccess(message: String) {
+        savePhrase()
+        Snackbar.make(binding.root, "Success: $message", Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onPhraseValidationError(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 
