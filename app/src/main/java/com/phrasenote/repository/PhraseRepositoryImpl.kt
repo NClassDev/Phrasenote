@@ -15,8 +15,27 @@ class PhraseRepositoryImpl(private val localDataSource: PhraseLocalDataSource): 
         return localDataSource.getPhrases()
     }
 
+    override suspend fun getAllResources(): ResourceList {
+        return localDataSource.getAllResources()
+    }
+
+    override suspend fun getResourceByTitle(title: String): Resource? {
+        val tempList = localDataSource.getAllResources()
+        var resource = Resource()
+        tempList.result.forEach { it ->
+            if(it.title == title)
+                resource = it
+        }
+        return resource
+    }
+
     override suspend fun savePhrase(phrase: Phrase) {
         localDataSource.savePhrase(phrase.toPhraseEntity())
     }
+
+    override suspend fun saveResource(resource: Resource) {
+        localDataSource.saveResource(resource.toResourceEntity())
+    }
+
 
 }

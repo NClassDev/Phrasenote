@@ -1,4 +1,4 @@
-package com.phrasenote.ui.addphrase
+package com.phrasenote.ui.addphrase.validationphrase
 
 import android.text.TextUtils
 

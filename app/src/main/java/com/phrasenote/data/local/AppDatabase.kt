@@ -5,8 +5,9 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.phrasenote.data.model.PhraseEntity
+import com.phrasenote.data.model.ResourceEntity
 
-@Database(entities = [PhraseEntity::class], version = 1)
+@Database(entities = [PhraseEntity::class, ResourceEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun phraseDao(): PhraseDao

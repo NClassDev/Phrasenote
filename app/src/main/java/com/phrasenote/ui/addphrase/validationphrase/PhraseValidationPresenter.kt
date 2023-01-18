@@ -1,6 +1,7 @@
-package com.phrasenote.ui.addphrase
+package com.phrasenote.ui.addphrase.validationphrase
 
-class PhraseValidationPresenter(private var iPhraseDataValidationMessage: IPhraseDataValidationMessage ) : IPhraseValidationPresenter{
+class PhraseValidationPresenter(private var iPhraseDataValidationMessage: IPhraseDataValidationMessage) :
+    IPhraseValidationPresenter {
     override fun onValidation(
         resourceTitle: String,
         author: String,

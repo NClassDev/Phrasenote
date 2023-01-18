@@ -1,4 +1,4 @@
-package com.phrasenote.ui.addphrase
+package com.phrasenote.ui.addphrase.validationphrase
 
 interface InterfacePhraseDataValidation {
     val resourceTitle: String

@@ -10,15 +10,26 @@ import com.phrasenote.core.Resource
 import com.phrasenote.data.model.Phrase
 import com.phrasenote.repository.PhraseRepository
 import kotlinx.coroutines.Dispatchers
+import kotlin.coroutines.coroutineContext
 
 class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
 
     val currentPhrase = MutableLiveData<Phrase>()
+    val currentResource = MutableLiveData<com.phrasenote.data.model.Resource>()
 
     fun fetchGetAllPhrases() = liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
         emit(Resource.Loading())
         try {
             emit(Resource.Success(repository.getAllPhrases()))
+        } catch (e:Exception) {
+            emit(Resource.Failure(e))
+        }
+    }
+
+    fun fetchGetAllResources() = liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
+        emit(Resource.Loading())
+        try {
+            emit(Resource.Success(repository.getAllResources()))
         } catch (e:Exception) {
             emit(Resource.Failure(e))
         }
@@ -34,8 +45,30 @@ class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
          }
     }
 
+    fun saveResource(resource: com.phrasenote.data.model.Resource) = liveData (viewModelScope.coroutineContext + Dispatchers.Main) {
+        emit(Resource.Loading())
+        try{
+            emit(Resource.Success(repository.saveResource(resource)))
+        }catch (e: Exception) {
+            emit(Resource.Failure(e))
+        }
+    }
+
+    fun getResourceByTitle(title: String) = liveData(viewModelScope.coroutineContext+Dispatchers.Main) {
+        emit(Resource.Loading())
+        try {
+           emit(Resource.Success(repository.getResourceByTitle(title)))
+        } catch (e:Exception) {
+            emit(Resource.Failure(e))
+        }
+    }
+
     fun setCurrentPhrase(phrase: Phrase) {
         currentPhrase.postValue(phrase)
+    }
+
+    fun setCurrentResource(resource: com.phrasenote.data.model.Resource) {
+        currentResource.postValue(resource)
     }
 
 }

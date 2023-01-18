@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.ContactsContract.Data
 import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -28,6 +27,9 @@ import com.phrasenote.permission.PermissionManager
 import com.phrasenote.presentation.PhraseViewModel
 import com.phrasenote.presentation.PhraseViewModelFactory
 import com.phrasenote.repository.PhraseRepositoryImpl
+import com.phrasenote.ui.addphrase.validationphrase.IPhraseDataValidationMessage
+import com.phrasenote.ui.addphrase.validationphrase.IPhraseValidationPresenter
+import com.phrasenote.ui.addphrase.validationphrase.PhraseValidationPresenter
 
 
 class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataValidationMessage {
@@ -50,6 +52,7 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
         super.onViewCreated(view, savedInstanceState)
         phraseValidationPresenter = PhraseValidationPresenter(this)
         binding = FragmentAddPhraseBinding.bind(view)
+
         binding.btnSave.setOnClickListener {
             binding.apply {
                 phraseValidationPresenter.onValidation(
@@ -91,9 +94,19 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
         }
     }
 
-    private fun savePhrase() {
+    private fun saveResource() {
+        val mResource = getResourceFromIU()
+        viewModel.saveResource(mResource).observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is Resource.Success -> {
+                    Log.d("AdPhrasePage",  "Resource saved success")
+                }
+            }
+        })
+    }
 
-        val mPhrase = getDataFromIU()
+    private fun savePhrase() {
+        var mPhrase = getDataFromIU()
 
         viewModel.savePhrase(mPhrase).observe(viewLifecycleOwner, Observer { result ->
             when (result) {
@@ -114,9 +127,10 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
 
     private fun getDataFromIU(): Phrase{
         binding.apply {
+
             return Phrase(
                 title = edResourceTitle.text.toString() ,
-                author = edAuthorResource.text.toString(),
+                author = viewModel.currentResource.value?.id.toString(),
                 location = edLocation.text.toString(),
                 phrase = edPhrase.text.toString(),
                 phrase_example = edPhraseExample.text.toString(),
@@ -125,6 +139,16 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
                 likes = 0,
                 resource = edResourceTitle.text.toString(),
                 resourceImg = currentImagePath!!
+            )
+        }
+    }
+
+    private fun getResourceFromIU(): com.phrasenote.data.model.Resource{
+        binding.apply {
+            return com.phrasenote.data.model.Resource(
+                title = edResourceTitle.text.toString() ,
+                author = edAuthorResource.text.toString(),
+                resource_image = if(currentImagePath!!.isEmpty() || currentImagePath!!.length < 5 ) "-1" else currentImagePath!!
             )
         }
     }
@@ -170,6 +194,7 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
     }
 
     override fun onPhraseValidationSuccess(message: String) {
+        saveResource()
         savePhrase()
         Snackbar.make(binding.root, "Success: $message", Snackbar.LENGTH_SHORT).show()
     }

@@ -1,8 +1,6 @@
 package com.phrasenote.data.local
 
-import com.phrasenote.data.model.PhraseEntity
-import com.phrasenote.data.model.PhraseList
-import com.phrasenote.data.model.toPhraseList
+import com.phrasenote.data.model.*
 
 class PhraseLocalDataSource(private val phraseDao: PhraseDao) {
 
@@ -14,4 +12,11 @@ class PhraseLocalDataSource(private val phraseDao: PhraseDao) {
         phraseDao.savePhrase(phraseEntity)
     }
 
+    suspend fun saveResource(resourceEntity: ResourceEntity) {
+        phraseDao.saveResource(resourceEntity)
+    }
+
+    suspend fun getAllResources(): ResourceList{
+        return phraseDao.getAllResources().toResourceList()
+    }
 }
