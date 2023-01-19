@@ -38,11 +38,21 @@
                 android:layout_height="wrap_content"
                 android:text="@string/resource_title" />
 
-            <EditText
+            <SearchView
                 android:id="@+id/ed_resource_title"
                 style="@style/box_form_style"
+                android:layout_marginBottom="1dp"
                 android:layout_height="wrap_content"
                 android:hint="Title" />
+
+            <ListView
+                android:id="@+id/list_view_resources"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/box_form_margin_start"
+                android:layout_marginEnd="100dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_height="400dp"/>
 
             <TextView
                 android:id="@+id/tv_author_resource"

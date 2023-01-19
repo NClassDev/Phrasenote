@@ -8,6 +8,8 @@ import android.provider.MediaStore
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.ArrayAdapter
+import android.widget.SearchView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
@@ -21,6 +23,7 @@ import com.phrasenote.core.Resource
 import com.phrasenote.data.local.AppDatabase
 import com.phrasenote.data.local.PhraseLocalDataSource
 import com.phrasenote.data.model.Phrase
+import com.phrasenote.data.model.ResourceList
 import com.phrasenote.databinding.FragmentAddPhraseBinding
 import com.phrasenote.permission.Permission
 import com.phrasenote.permission.PermissionManager
@@ -34,13 +37,18 @@ import com.phrasenote.ui.addphrase.validationphrase.PhraseValidationPresenter
 
 class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataValidationMessage {
 
+    private lateinit var allResourceList2: List<com.phrasenote.data.model.Resource>
     private lateinit var binding: FragmentAddPhraseBinding
     private var currentImagePath: String? = null
     private var isImagePhrase: Boolean = false
     private var imgPickerCode: String? = null
+    private var resourcesByTitle = mutableListOf<String>()
 
     private lateinit var resultLauncher: ActivityResultLauncher<Intent>
     private val permissionManager = PermissionManager.from(this)
+    private lateinit var resourcesAdapter: ArrayAdapter<*>
+
+    private var allResourceList = ResourceList()
 
     private lateinit var phraseValidationPresenter : IPhraseValidationPresenter
 
@@ -56,7 +64,7 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
         binding.btnSave.setOnClickListener {
             binding.apply {
                 phraseValidationPresenter.onValidation(
-                    resourceTitle = edResourceTitle.text.toString() ,
+                    resourceTitle = edResourceTitle.query.toString() ,
                     author = edAuthorResource.text.toString(),
                     location = edLocation.text.toString(),
                     phrase = edPhrase.text.toString(),
@@ -92,6 +100,50 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
 //            }
 
         }
+
+        getAllResources()
+
+        binding.edResourceTitle.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                binding.edResourceTitle.clearFocus()
+                binding.listViewResources.visibility = View.VISIBLE
+                resourcesByTitle.filter { it == p0 }
+                resourcesAdapter.filter.filter(p0)
+
+                return false
+            }
+
+            override fun onQueryTextChange(p0: String?): Boolean {
+                binding.listViewResources.visibility = View.VISIBLE
+                resourcesByTitle.filter { it == p0 }
+                resourcesAdapter.filter.filter(p0)
+                return false
+            }
+        })
+
+        binding.listViewResources.setOnItemClickListener { adapterView, view, i, l ->
+            val title = resourcesByTitle.get(i)
+            binding.edResourceTitle.setQuery(title, true)
+            //binding.edResourceTitle.tex = title
+            binding.listViewResources.visibility = View.GONE
+        }
+
+
+    }
+
+    private fun getAllResources(){
+        viewModel.fetchGetAllResources().observe(viewLifecycleOwner, Observer { result ->
+            when(result) {
+                is Resource.Loading -> {}
+                is Resource.Success -> {
+                    result.data.result.forEach {
+                        resourcesByTitle.add(it.title)
+                    }
+                    resourcesAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, resourcesByTitle)
+                    binding.listViewResources.adapter = resourcesAdapter
+                }
+            }
+        })
     }
 
     private fun saveResource() {
@@ -129,15 +181,15 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
         binding.apply {
 
             return Phrase(
-                title = edResourceTitle.text.toString() ,
-                author = viewModel.currentResource.value?.id.toString(),
+                title = edResourceTitle.query.toString() ,
+                author = edAuthorResource.text.toString(),
                 location = edLocation.text.toString(),
                 phrase = edPhrase.text.toString(),
                 phrase_example = edPhraseExample.text.toString(),
                 meaning = edMeaning.text.toString(),
                 create_at = DataMapper.getDate(),
                 likes = 0,
-                resource = edResourceTitle.text.toString(),
+                resource = edResourceTitle.query.toString(),
                 resourceImg = currentImagePath!!
             )
         }
@@ -146,7 +198,7 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
     private fun getResourceFromIU(): com.phrasenote.data.model.Resource{
         binding.apply {
             return com.phrasenote.data.model.Resource(
-                title = edResourceTitle.text.toString() ,
+                title = edResourceTitle.query.toString() ,
                 author = edAuthorResource.text.toString(),
                 resource_image = if(currentImagePath!!.isEmpty() || currentImagePath!!.length < 5 ) "-1" else currentImagePath!!
             )
