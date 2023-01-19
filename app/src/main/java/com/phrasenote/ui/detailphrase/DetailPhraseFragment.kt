@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.google.android.material.snackbar.Snackbar
 import com.phrasenote.R
 import com.phrasenote.core.DataMapper
 import com.phrasenote.data.local.AppDatabase
@@ -57,6 +58,15 @@ class DetailPhraseFragment : Fragment(R.layout.fragment_phrase_detail) {
         binding.imgBack.setOnClickListener {
             findNavController().navigate(R.id.action_detailPhraseFragment_to_homePageFragment)
         }
+
+        binding.imgDelete.setOnClickListener {
+            viewModel.delete_Phrase(phrase)
+            Snackbar.make(binding.root, "Phrase deleted success", Snackbar.LENGTH_SHORT).show()
+
+            findNavController().navigate(R.id.action_detailPhraseFragment_to_homePageFragment)
+
+        }
+
 
     }
 

@@ -1,6 +1,7 @@
 package com.phrasenote.data.local
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -23,5 +24,8 @@ interface PhraseDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun saveResource(resourceEntity: ResourceEntity)
+
+    @Delete
+    suspend fun deletePhrase(phraseEntity: PhraseEntity)
 
 }

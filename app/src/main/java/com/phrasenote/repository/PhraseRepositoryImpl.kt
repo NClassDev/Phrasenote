@@ -37,5 +37,9 @@ class PhraseRepositoryImpl(private val localDataSource: PhraseLocalDataSource): 
         localDataSource.saveResource(resource.toResourceEntity())
     }
 
+    override suspend fun deletePhrase(phrase: Phrase) {
+        localDataSource.deletePhrase(phrase.toPhraseEntity())
+    }
+
 
 }

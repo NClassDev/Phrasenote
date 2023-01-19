@@ -11,6 +11,7 @@ import com.phrasenote.data.model.Phrase
 import com.phrasenote.data.model.ResourceList
 import com.phrasenote.repository.PhraseRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.coroutines.coroutineContext
 
 class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
@@ -83,6 +84,10 @@ class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
 
     fun setCurrentResource(resource: com.phrasenote.data.model.Resource) {
         currentResource.postValue(resource)
+    }
+
+    fun delete_Phrase(phrase: Phrase) = viewModelScope.launch{
+        repository.deletePhrase(phrase)
     }
 
 }

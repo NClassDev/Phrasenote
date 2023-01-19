@@ -19,4 +19,8 @@ class PhraseLocalDataSource(private val phraseDao: PhraseDao) {
     suspend fun getAllResources(): ResourceList{
         return phraseDao.getAllResources().toResourceList()
     }
+
+    suspend fun deletePhrase(phraseEntity: PhraseEntity) {
+        phraseDao.deletePhrase(phraseEntity)
+    }
 }
