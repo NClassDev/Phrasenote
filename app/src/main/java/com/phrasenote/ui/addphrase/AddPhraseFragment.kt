@@ -109,7 +109,6 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
                 binding.listViewResources.visibility = View.VISIBLE
                 resourcesByTitle.filter { it == p0 }
                 resourcesAdapter.filter.filter(p0)
-
                 return false
             }
 

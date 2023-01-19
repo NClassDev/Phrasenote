@@ -8,12 +8,14 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.phrasenote.core.Resource
 import com.phrasenote.data.model.Phrase
+import com.phrasenote.data.model.ResourceList
 import com.phrasenote.repository.PhraseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.coroutineContext
 
 class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
 
+    private lateinit var allResources: List<com.phrasenote.data.model.Resource>
     val currentPhrase = MutableLiveData<Phrase>()
     val currentResource = MutableLiveData<com.phrasenote.data.model.Resource>()
 
@@ -29,7 +31,9 @@ class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
     fun fetchGetAllResources() = liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
         emit(Resource.Loading())
         try {
-            emit(Resource.Success(repository.getAllResources()))
+            val result = repository.getAllResources()
+            emit(Resource.Success(result))
+            allResources = Resource.Success(result).data.result
         } catch (e:Exception) {
             emit(Resource.Failure(e))
         }
@@ -48,7 +52,17 @@ class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
     fun saveResource(resource: com.phrasenote.data.model.Resource) = liveData (viewModelScope.coroutineContext + Dispatchers.Main) {
         emit(Resource.Loading())
         try{
-            emit(Resource.Success(repository.saveResource(resource)))
+            var coincidences = 0
+            allResources.forEach {
+                if(it.title == resource.title) {
+                    coincidences++
+                }
+            }
+
+            if(coincidences <=0 ) {
+                emit(Resource.Success(repository.saveResource(resource)))
+            }
+
         }catch (e: Exception) {
             emit(Resource.Failure(e))
         }
