@@ -34,12 +34,14 @@ fun ResourceEntity.toResource(): Resource = Resource(
     this.id,
     this.title,
     this.author,
+    this.resource_image
 )
 
 fun Resource.toResourceEntity(): ResourceEntity = ResourceEntity(
     this.id,
     this.title,
     this.author,
+    this.resource_image
 )
 
 fun List<ResourceEntity>.toResourceList(): ResourceList {
@@ -50,4 +52,4 @@ fun List<ResourceEntity>.toResourceList(): ResourceList {
     return ResourceList(resultList)
 }
 
-data class ResourceList(val result: List<Resource> = listOf())
+data class ResourceList(val results: List<Resource> = listOf())

@@ -135,7 +135,7 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
             when(result) {
                 is Resource.Loading -> {}
                 is Resource.Success -> {
-                    result.data.result.forEach {
+                    result.data.results.forEach {
                         resourcesByTitle.add(it.title)
                     }
                     resourcesAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, resourcesByTitle)
@@ -196,10 +196,11 @@ class AddPhraseFragment : Fragment(R.layout.fragment_add_phrase), IPhraseDataVal
 
     private fun getResourceFromIU(): com.phrasenote.data.model.Resource{
         binding.apply {
+            Log.d("AdPhrasePage", "IMg: $currentImagePath")
             return com.phrasenote.data.model.Resource(
                 title = edResourceTitle.query.toString() ,
                 author = edAuthorResource.text.toString(),
-                resource_image = if(currentImagePath!!.isEmpty() || currentImagePath!!.length < 5 ) "-1" else currentImagePath!!
+                resource_image = currentImagePath!!
             )
         }
     }

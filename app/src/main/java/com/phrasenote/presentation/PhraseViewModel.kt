@@ -32,9 +32,9 @@ class PhraseViewModel (private val repository: PhraseRepository) : ViewModel(){
     fun fetchGetAllResources() = liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
         emit(Resource.Loading())
         try {
+            emit(Resource.Success(repository.getAllResources()))
             val result = repository.getAllResources()
-            emit(Resource.Success(result))
-            allResources = Resource.Success(result).data.result
+            allResources = Resource.Success(result).data.results
         } catch (e:Exception) {
             emit(Resource.Failure(e))
         }

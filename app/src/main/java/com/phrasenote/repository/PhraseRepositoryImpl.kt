@@ -22,7 +22,7 @@ class PhraseRepositoryImpl(private val localDataSource: PhraseLocalDataSource): 
     override suspend fun getResourceByTitle(title: String): Resource? {
         val tempList = localDataSource.getAllResources()
         var resource = Resource()
-        tempList.result.forEach { it ->
+        tempList.results.forEach { it ->
             if(it.title == title)
                 resource = it
         }

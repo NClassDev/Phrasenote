@@ -7,7 +7,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.phrasenote.R
 import com.phrasenote.core.Resource
 import com.phrasenote.data.local.AppDatabase
@@ -18,14 +17,14 @@ import com.phrasenote.presentation.PhraseViewModel
 import com.phrasenote.presentation.PhraseViewModelFactory
 import com.phrasenote.repository.PhraseRepositoryImpl
 import com.phrasenote.ui.home.adapters.PhraseAdapter
-import kotlinx.android.synthetic.main.fragment_home_page.*
+import com.phrasenote.ui.home.adapters.ResourceAdapter
 
 
-class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.OnPhraseClickListener {
+class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.OnPhraseClickListener, ResourceAdapter.OnResourceClickListener {
 
     private lateinit var binding: FragmentHomePageBinding
     private lateinit var phraseAdapter: PhraseAdapter
-    private lateinit var resourceAdapter: PhraseAdapter
+    private lateinit var resourceAdapter: ResourceAdapter
 
     private val viewModel by viewModels<PhraseViewModel> {
         PhraseViewModelFactory(
@@ -57,11 +56,6 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.On
                         adapter = phraseAdapter
                     }
 
-                    resourceAdapter = PhraseAdapter(result.data.results, this@HomePageFragment)
-                    binding.rvResources.apply {
-                        adapter = phraseAdapter
-                    }
-
                     Log.d("HomePage", "Success: ${result.data.results.size}")
 
                 }
@@ -71,6 +65,26 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.On
             }
 
         })
+
+        viewModel.fetchGetAllResources().observe(viewLifecycleOwner, Observer { result ->
+            when (result) {
+                is Resource.Loading -> {
+                    Log.d("HomePage", "Loading")
+                }
+                is Resource.Success -> {
+
+                    resourceAdapter = ResourceAdapter( result.data.results , this@HomePageFragment)
+                    binding.rvResources.apply {
+                        adapter = resourceAdapter
+                    }
+
+                    //Log.d("HomePage", "Success: ${result.data.results.size}")
+
+                }
+                is Resource.Failure -> {
+                    Log.d("HomePage", "Failure")
+                }
+            }        })
     }
 
     override fun onPhraseClick(phrase: Phrase) {
@@ -80,6 +94,10 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.On
         }
         viewModel.setCurrentPhrase(phrase)
         findNavController().navigate(R.id.action_homePageFragment_to_detailPhraseFragment, bundle)
+    }
+
+    override fun onResourceClick(resource: com.phrasenote.data.model.Resource) {
+        TODO("Not yet implemented")
     }
 
 }
