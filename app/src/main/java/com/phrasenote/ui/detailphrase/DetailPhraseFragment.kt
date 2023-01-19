@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.phrasenote.R
+import com.phrasenote.core.DataMapper
 import com.phrasenote.data.local.AppDatabase
 import com.phrasenote.data.local.PhraseLocalDataSource
 import com.phrasenote.databinding.FragmentPhraseDetailBinding
@@ -48,7 +49,9 @@ class DetailPhraseFragment : Fragment(R.layout.fragment_phrase_detail) {
             tvMeaning.text = phrase.meaning
             tvCreatedAt.text = phrase.create_at
             // TODO Create a Interface to load a Image from Camera
-            Glide.with(binding.root).load(R.drawable.img_default_1).transform(CircleCrop()).into(binding.imgResource)
+            binding.imgResource.setImageBitmap(DataMapper.decodeImage(phrase.resourceImg))
+            //Glide.with(binding.root).load(R.drawable.img_default_1).transform(CircleCrop()).into(binding.imgResource)
+
         }
 
         binding.imgBack.setOnClickListener {
