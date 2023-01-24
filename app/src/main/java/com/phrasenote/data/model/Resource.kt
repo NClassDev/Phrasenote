@@ -52,4 +52,17 @@ fun List<ResourceEntity>.toResourceList(): ResourceList {
     return ResourceList(resultList)
 }
 
+fun Resource.ResourceDummie1(): Resource = Resource(
+    title = "My Title",
+    author = "My Author",
+    resource_image = "--"
+)
+
+fun Resource.ResourceDummie2(): Resource = Resource(
+    title = "My Title 2",
+    author = "My Author 2 ",
+    resource_image = "-- 2 -- "
+)
+
+
 data class ResourceList(val results: List<Resource> = listOf())
