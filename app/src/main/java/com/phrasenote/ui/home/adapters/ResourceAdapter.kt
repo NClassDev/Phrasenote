@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.phrasenote.R
 import com.phrasenote.core.BaseViewHolder
 import com.phrasenote.core.DataMapper
 import com.phrasenote.data.model.Resource
@@ -45,7 +46,13 @@ class ResourceAdapter(
         override fun bind(item: Resource) {
             binding.tvTitle.text = item.title
             binding.tvAuthor.text = item.author
-            binding.imgResource.setImageBitmap(DataMapper.decodeImage(item.resource_image))
+
+            if(item.resource_image.length < 10) {
+                binding.imgResource.setImageResource(R.drawable.img_resource_a)
+            }else {
+                binding.imgResource.setImageBitmap(DataMapper.decodeImage(item.resource_image))
+            }
+
         }
     }
 

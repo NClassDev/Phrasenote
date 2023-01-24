@@ -55,13 +55,13 @@ fun List<ResourceEntity>.toResourceList(): ResourceList {
 fun Resource.ResourceDummie1(): Resource = Resource(
     title = "My Title",
     author = "My Author",
-    resource_image = "--"
+    resource_image = "-"
 )
 
 fun Resource.ResourceDummie2(): Resource = Resource(
     title = "My Title 2",
     author = "My Author 2 ",
-    resource_image = "-- 2 -- "
+    resource_image = "-"
 )
 
 
