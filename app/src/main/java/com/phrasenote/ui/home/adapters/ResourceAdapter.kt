@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.phrasenote.core.BaseViewHolder
 import com.phrasenote.core.DataMapper
 import com.phrasenote.data.model.Resource
-import com.phrasenote.databinding.ResourceItemBinding
+import com.phrasenote.databinding.ResourceCardCustomBeta1Binding
 
 class ResourceAdapter(
     private val resourceList: List<Resource>,
@@ -20,7 +20,7 @@ class ResourceAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
-        val itemBinding = ResourceItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemBinding = ResourceCardCustomBeta1Binding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         val holder = ResourceViewHolder(parent.context, itemBinding)
 
@@ -41,7 +41,7 @@ class ResourceAdapter(
 
     override fun getItemCount(): Int = resourceList.size
 
-    private inner class ResourceViewHolder(val context: Context, val binding: ResourceItemBinding): BaseViewHolder<Resource>(binding.root) {
+    private inner class ResourceViewHolder(val context: Context, val binding: ResourceCardCustomBeta1Binding): BaseViewHolder<Resource>(binding.root) {
         override fun bind(item: Resource) {
             binding.tvTitle.text = item.title
             binding.tvAuthor.text = item.author

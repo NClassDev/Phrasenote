@@ -97,7 +97,8 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page), PhraseAdapter.On
     }
 
     override fun onResourceClick(resource: com.phrasenote.data.model.Resource) {
-        TODO("Not yet implemented")
+        Log.d("HomePage", "ResourceClick: ${resource.title}")
+
     }
 
 }

@@ -41,6 +41,11 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="small_title_style" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <style name="height_title_style" parent="@android:style/Widget.TextView">
         <item name="android:textSize">@dimen/hight_text_size</item>
         <item name="android:textColor">@color/black</item>
