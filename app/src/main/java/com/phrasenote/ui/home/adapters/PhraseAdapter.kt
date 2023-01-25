@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.phrasenote.R
 import com.phrasenote.core.BaseViewHolder
 import com.phrasenote.core.DataMapper
 import com.phrasenote.data.model.Phrase
-import com.phrasenote.data.model.PhraseList
-import com.phrasenote.databinding.PhraseItemBinding
+import com.phrasenote.databinding.PhrasesCardCustomBeta1Binding
 
 class PhraseAdapter(
     private val phraseList: List<Phrase>,
@@ -23,7 +21,7 @@ class PhraseAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
-        val itemBinding = PhraseItemBinding.inflate(
+        val itemBinding = PhrasesCardCustomBeta1Binding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
 
@@ -48,7 +46,7 @@ class PhraseAdapter(
 
     override fun getItemCount(): Int = phraseList.size
 
-    private inner class PhraseViewHolder(val context: Context, val binding: PhraseItemBinding) :
+    private inner class PhraseViewHolder(val context: Context, val binding: PhrasesCardCustomBeta1Binding) :
         BaseViewHolder<Phrase>(binding.root) {
         override fun bind(item: Phrase) {
             binding.tvTitle.text = item.title
