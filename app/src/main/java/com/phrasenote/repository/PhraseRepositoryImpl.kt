@@ -8,17 +8,20 @@ class PhraseRepositoryImpl(private val localDataSource: PhraseLocalDataSource): 
     override suspend fun getAllPhrases(): PhraseList {
         if (localDataSource.getPhrases().results.size < 1) {
             val phraseTemp = Phrase()
-            val resourceTemp = Resource()
             //TODO Remove the lines above before the release version
             localDataSource.savePhrase(phraseTemp.PhraseDummie1().toPhraseEntity())
             localDataSource.savePhrase(phraseTemp.PhraseDummie2().toPhraseEntity())
-            localDataSource.saveResource(resourceTemp.ResourceDummie1().toResourceEntity())
-            localDataSource.saveResource(resourceTemp.ResourceDummie2().toResourceEntity())
         }
         return localDataSource.getPhrases()
     }
 
     override suspend fun getAllResources(): ResourceList {
+        if (localDataSource.getAllResources().results.size < 1) {
+            val resourceTemp = Resource()
+            localDataSource.saveResource(resourceTemp.ResourceDummie1().toResourceEntity())
+            localDataSource.saveResource(resourceTemp.ResourceDummie2().toResourceEntity())
+        }
+
         return localDataSource.getAllResources()
     }
 

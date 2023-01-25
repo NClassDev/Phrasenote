@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="true"
-        android:layout_margin="1dp"
+        android:layout_margin="2dp"
         app:cardCornerRadius="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,8 +48,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:ellipsize="end"
+                android:textStyle="bold"
                 android:maxLines="1"
-                android:layout_marginStart="30dp"
+                android:layout_marginStart="25dp"
                 android:text="TextView"
                 android:textColor="@color/blue_2B55876"
                 android:textSize="30sp"

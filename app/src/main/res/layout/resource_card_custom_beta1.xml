@@ -41,12 +41,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="6dp"
                 android:layout_marginTop="89dp"
-                android:autoSizeMinTextSize="12sp"
+                android:autoSizeMinTextSize="13sp"
                 android:ellipsize="end"
+                android:textStyle="bold"
                 android:maxLines="1"
                 android:text="TextViewddfdfdfdfdfdfdfdfdfdfddfdfdfdfdfdf"
                 android:textColor="@color/white"
-                android:textSize="11sp"
+                android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,10 +57,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="9dp"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="117dp"
                 android:text="TextView"
                 android:textColor="@color/white_50"
-                android:textSize="7sp"
+                android:textSize="8sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -72,7 +73,7 @@
                 android:layout_marginTop="135dp"
                 android:text="TextView"
                 android:textColor="@color/white_30"
-                android:textSize="6sp"
+                android:textSize="7sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
