@@ -1,5 +1,6 @@
 package com.phrasenote.ui.detailphrase
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -44,7 +45,7 @@ class DetailPhraseFragment : Fragment(R.layout.fragment_phrase_detail) {
         binding.apply {
             tvAuthor.text = phrase.author
             tvResource.text = phrase.resource
-            tvLocationTitle.text = phrase.location
+            //tvLocationTitle.text = phrase.location
             tvPhrase.text = phrase.phrase
             tvPhraseExample.text = phrase.phrase_example
             tvMeaning.text = phrase.meaning
@@ -62,11 +63,31 @@ class DetailPhraseFragment : Fragment(R.layout.fragment_phrase_detail) {
         binding.imgDelete.setOnClickListener {
             viewModel.delete_Phrase(phrase)
             Snackbar.make(binding.root, "Phrase deleted success", Snackbar.LENGTH_SHORT).show()
-
             findNavController().navigate(R.id.action_detailPhraseFragment_to_homePageFragment)
-
         }
 
+        binding.btnInformation.setOnClickListener {
+            binding.btnLocation.setBackgroundResource(R.drawable.btn_blue_20)
+            binding.btnInformation.setBackgroundResource(R.drawable.btn_blue_100)
+            binding.imgDelete.visibility = View.GONE
+            binding.tvCreatedAt.visibility = View.GONE
+            binding.tvMeaning.visibility = View.VISIBLE
+            binding.tvPhraseExample.text = phrase.phrase_example
+            binding.tvMeaning.text = phrase.meaning
+            binding.tvMeaningTitle.text = "Meaning"
+            binding.tvExampleTitle.text = "Example"
+        }
+
+        binding.btnLocation.setOnClickListener {
+            binding.btnLocation.setBackgroundResource(R.drawable.btn_blue_100)
+            binding.btnInformation.setBackgroundResource(R.drawable.btn_blue_20)
+            binding.imgDelete.visibility = View.VISIBLE
+            binding.tvCreatedAt.visibility = View.VISIBLE
+            binding.tvPhraseExample.text = phrase.location
+            binding.tvMeaning.visibility = View.GONE
+            binding.tvMeaningTitle.text = "Delete Phrase"
+            binding.tvExampleTitle.text = "Location"
+        }
 
     }
 
