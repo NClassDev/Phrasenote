@@ -5,4 +5,24 @@
     <string name="add_phrase">Add Phrase Screen</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="resource_title">Resource title</string>
+    <string name="author_resource_title">Autor Resource</string>
+    <string name="phrase_title">Phrase</string>
+    <string name="phrase_example_title">Phrase Example</string>
+    <string name="phrase_meaning_title">Meaning</string>
+    <string name="location_title">Location</string>
+
+    <string name="Welcome_title">Welcome</string>
+    <string name="user_name_title">John Carson</string>
+
+    <string name="my_resources_title">My Resources</string>
+    <string name="my_phrases_title">My Phrases</string>
+
+
+    <string name="dialog_permission_title">Permiso</string>
+    <string name="dialog_permission_default_message">Permisio por defecto</string>
+    <string name="dialog_permission_button_positive">Confirmar</string>
+    <string name="permision_message">Necesitamos permisos de cámara</string>
+
+
 </resources>

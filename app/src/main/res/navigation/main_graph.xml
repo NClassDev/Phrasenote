@@ -7,7 +7,35 @@
 
     <fragment
         android:id="@+id/homePageFragment"
-        android:name="com.phrasenote.HomePageFragment"
+        android:name="com.phrasenote.ui.home.HomePageFragment"
         android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home_page" />
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/action_homePageFragment_to_addPhraseFragment"
+            app:destination="@id/addPhraseFragment" />
+        <action
+            android:id="@+id/action_homePageFragment_to_detailPhraseFragment"
+            app:destination="@id/detailPhraseFragment" />
+        <argument
+            android:name="phrase"
+            app:argType="com.phrasenote.data.model.Phrase"/>
+    </fragment>
+    <fragment
+        android:id="@+id/addPhraseFragment"
+        android:name="com.phrasenote.ui.addphrase.AddPhraseFragment"
+        android:label="fragment_add_phrase"
+        tools:layout="@layout/fragment_add_phrase" >
+        <action
+            android:id="@+id/action_addPhraseFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailPhraseFragment"
+        android:name="com.phrasenote.ui.detailphrase.DetailPhraseFragment"
+        android:label="fragment_phrase_detail"
+        tools:layout="@layout/fragment_phrase_detail" >
+        <action
+            android:id="@+id/action_detailPhraseFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+    </fragment>
 </navigation>
